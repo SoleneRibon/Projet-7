@@ -41,6 +41,10 @@ module.exports = multer({storage: storage}).single('image');
 
 // Redimensionnement de l'image
 module.exports.resizedImage = (req, res, next) => {
+// on vérifie si il y a un file dans le requete sinon on passe directement à la suite
+  if (!req.file) {
+    return next();
+  }
  
 
   const filePath = req.file.path;
