@@ -55,11 +55,12 @@ module.exports.resizedImage = (req, res, next) => {
   const outputFilePath = path.join('images', outputFileName);
 
   sharp(filePath)
+    //changement de la qualité pour 80%
     .webp({ quality  : 80 })
     .resize({ width: 240, height: 280 })
     .toFile(outputFilePath)
     .then(() => {
-      // Remplacer le fichier original par le fichier redimensionné
+      // Remplacer le fichier original par le fichier compressé
       fs.unlink(filePath, () => {
         req.file.path = outputFilePath;
         next();
