@@ -104,7 +104,7 @@ exports.createRating = (req, res, next) => {
       // Calcul de la moyenne des notes
       const ratings = book.ratings.map(r => r.grade);
       const averageRating = ratings.reduce((acc, curr) => acc + curr, 0) / ratings.length;
-      console.log("test");
+      
 
       // On met à jour la nouvelle valeur
       book.averageRating = parseFloat(averageRating.toFixed(2));
