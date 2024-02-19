@@ -18,21 +18,7 @@ const storage = multer.diskStorage({
   filename: (req, file, callback) => {
     const name = file.originalname.split(' ').join('_');
     const extension = MIME_TYPES[file.mimetype];
-
-    // On formate le format de la date afin de la personaliser
-    const formattedDate = new Date().toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month:'2-digit',
-      day: '2-digit',
-    })
-
-    // On supprime et remplace les séparateurs par défaut '/' par '_' afin d'éviter un problème de caractère pour Windows
-    const dateNoSeparator = formattedDate.replace(/\//g, '_');
-
-    const finalFileName = `${name}_${dateNoSeparator}.${extension}`;
-
-    callback(null, finalFileName);
-
+    callback(null, name + Date.now() + '.' + extension);
   }
 });
 
